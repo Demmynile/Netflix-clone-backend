@@ -4,11 +4,13 @@ const express = require("express");
 //intialize routes
 const router = express.Router()
 
-//controllers declarations
-const { registerUser } = require("../controllers/auth");
+//controllers and middleware  declarations
+const { updateUser } = require("../controllers/users");
+const verify = require("../verifyToken");
+
 
 
 //endpoint routes
-router.post("/register" , registerUser)
+router.put("/:id" , verify , updateUser)
 
 module.exports = router;

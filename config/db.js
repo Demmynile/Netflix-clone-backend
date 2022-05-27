@@ -14,6 +14,6 @@ mongoose.connect(process.env.BACKEND_CONNECT , {
 .then(() => {
     console.log("DB connected successfully")
 })
-.catch(() => {
-    console.log("DB not connected successfully")
+.catch((err) => {
+    console.log(err)
 })

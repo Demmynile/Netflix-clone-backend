@@ -1,7 +1,9 @@
 //import libraries
 const express = require("express")
 const database = require("./config/db")
-const authRoutes = require('./routes/user')
+const authRoutes = require("./routes/auth")
+const userRoutes = require("./routes/user")
+
 
 
 //intialize the app 
@@ -17,6 +19,8 @@ app.use(express.json())
 
 //general url for endpoint 
 app.use('/api/auth' , authRoutes)
+app.use('/api/users' , userRoutes)
+
 
 // running the app at a  required port
 app.listen(8000 , () => {
