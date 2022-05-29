@@ -3,6 +3,9 @@ const express = require("express")
 const database = require("./config/db")
 const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
+const movieRoutes = require("./routes/movie")
+const listRoutes = require("./routes/list")
+
 
 
 
@@ -20,6 +23,8 @@ app.use(express.json())
 //general url for endpoint 
 app.use('/api/auth' , authRoutes)
 app.use('/api/users' , userRoutes)
+app.use('/api/movie' , movieRoutes)
+app.use('/api/list' , listRoutes)
 
 
 // running the app at a  required port
