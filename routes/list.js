@@ -5,13 +5,17 @@ const express = require("express");
 const router = express.Router()
 
 //controllers and middleware  declarations
-const { createList} = require("../controllers/list");
+const { createList, deleteList, getList} = require("../controllers/list");
 const verify = require("../verifyToken");
 
 
 
 //endpoint routes
 router.post("/" , verify , createList)
+router.delete("/:id" , verify , deleteList)
+router.get("/" , verify,  getList)
+
+
 
 
 

@@ -1,3 +1,4 @@
+const req = require("express/lib/request");
 const List = require("../models/List")
 
 
@@ -22,7 +23,53 @@ exports.createList = async(req,res) => {
 }
 
 
-//DELETE
+//DELETE LIST
+exports.deleteList = async(req,res) => {
+  if(req.user.isAdmin){
+      
+      try {
+         await List.findByIdAndDelete(req.params.id)
+         res.status(201).json("List has been deleted")
+      }
+      catch(err){
+        res.status(500).json(err)
+      }
+      
+  }
+  else {
+    res.status(403).json("You are not allowed!")
+  }
+}
+
+
+//GET ALL LIST
+exports.getList = async(req , res) => {
+  const typeQuery = req.query.type;
+  const genreQuery = req.query.genre;
+  let list = [];
+  try {
+    if (typeQuery) {
+      if (genreQuery) {
+        list =  await List.aggregate([
+          { $sample: { size: 3 } },
+          { $match: { type: typeQuery, genre: genreQuery } },
+        ]);
+      } else {
+        list = await List.aggregate([
+          { $sample: { size: 3 } },
+          { $match: { type: typeQuery } },
+        ]);
+      }
+    } else {
+      list = await List.aggregate([{ $sample: { size: 3 } }]);
+    }
+    res.status(200).json(list);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+
+}
 
 
 
