@@ -51,17 +51,17 @@ exports.getList = async(req , res) => {
     if (typeQuery) {
       if (genreQuery) {
         list =  await List.aggregate([
-          { $sample: { size: 3 } },
+          { $sample: { size: 10 } },
           { $match: { type: typeQuery, genre: genreQuery } },
         ]);
       } else {
         list = await List.aggregate([
-          { $sample: { size: 3 } },
+          { $sample: { size: 10 } },
           { $match: { type: typeQuery } },
         ]);
       }
     } else {
-      list = await List.aggregate([{ $sample: { size: 3 } }]);
+      list = await List.aggregate([{ $sample: { size: 10 } }]);
     }
     res.status(200).json(list);
   } catch (err) {

@@ -1,5 +1,6 @@
 //import libraries
 const express = require("express")
+const cors = require('cors')
 const database = require("./config/db")
 const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
@@ -14,7 +15,8 @@ const app = express()
 
 console.log(database)
 
-
+// cors activated
+app.use(cors())
 //accepting the json format
 app.use(express.json())
 
